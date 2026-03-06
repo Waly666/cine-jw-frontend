@@ -1,0 +1,35 @@
+﻿version: '3.8'
+services:
+  mongo:
+    image: mongo:6
+    container_name: cinejwt_mongo
+    restart: always
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - cinejwt_network
+  backend:
+    build: .
+    container_name: cinejwt_backend
+    restart: always
+    ports:
+      - "4000:3000"
+    env_file:
+      - .env
+    depends_on:
+      - mongo
+    networks:
+      - cinejwt_network
+  frontend:
+    build: ./frontend
+    container_name: cinejwt_frontend
+    restart: always
+    ports:
+      - "8081:80"
+    networks:
+      - cinejwt_network
+volumes:
+  mongo_data:
+networks:
+  cinejwt_network:
+    driver: bridge

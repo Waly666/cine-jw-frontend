@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000';
+const API_URL = 'http://72.60.175.120:4000';
 
 // ========================
 // TOKEN HELPERS
