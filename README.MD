@@ -1,75 +1,102 @@
-# 🎬 Movie Online - Backend API
+# 🎬 CineJWT — Plataforma de Películas Online
 
-API REST para una plataforma de películas online con autenticación JWT, control de roles y base de datos MongoDB.
+Aplicación web fullstack para gestión de una plataforma de películas online. Incluye autenticación JWT con refresh token, control de roles, encriptación de contraseñas y un dashboard interactivo con gestión completa de películas y usuarios.
 
 ---
 
 ## 📋 Descripción del Proyecto
 
-Movie Online es una API REST desarrollada con Node.js y Express que permite gestionar usuarios y películas. Incluye autenticación con JWT, refresh tokens, encriptación de contraseñas con bcrypt y control de acceso basado en roles (admin/user).
+CineJWT es una aplicación fullstack que permite a los usuarios explorar un catálogo de películas y a los administradores gestionar tanto el catálogo como los usuarios registrados. El sistema implementa autenticación segura con JWT, tokens de refresco automático y encriptación de contraseñas con bcrypt.
 
 ---
 
 ## 🛠️ Tecnologías Usadas
 
-| Tecnología | Versión | Descripción |
-|------------|---------|-------------|
-| Node.js | v24+ | Entorno de ejecución |
-| Express | v5+ | Framework web |
-| MongoDB | Local | Base de datos NoSQL |
-| Mongoose | v8+ | ODM para MongoDB |
-| JWT | - | Autenticación con tokens |
-| Bcrypt | - | Encriptación de contraseñas |
-| Dotenv | - | Variables de entorno |
-| CORS | - | Control de acceso entre dominios |
+### Backend
+
+| Tecnología           | Descripción                                    |
+| -------------------- | ---------------------------------------------- |
+| Node.js              | Entorno de ejecución                           |
+| Express v5           | Framework web                                  |
+| MongoDB              | Base de datos NoSQL                            |
+| Mongoose             | ODM para MongoDB                               |
+| JSON Web Token (JWT) | Autenticación con Access Token + Refresh Token |
+| Bcrypt               | Encriptación de contraseñas (10 rondas)        |
+| Dotenv               | Variables de entorno                           |
+| CORS                 | Control de acceso entre dominios               |
+
+### Frontend
+
+| Tecnología      | Descripción                         |
+| --------------- | ----------------------------------- |
+| HTML5           | Estructura                          |
+| CSS3            | Estilos con variables y animaciones |
+| JavaScript ES6+ | Lógica del cliente                  |
+| Fetch API       | Comunicación con el backend         |
+| LocalStorage    | Almacenamiento de tokens            |
 
 ---
 
-## 🗂️ Estructura de Carpetas
+## 🗂️ Estructura del Proyecto
 
 ```
-backend/
+cinejwt/
 ├── controllers/
-│   ├── auth.controller.js      # Lógica de login y refresh token
-│   ├── movie.controller.js     # Lógica CRUD de películas
-│   └── user.controller.js      # Lógica CRUD de usuarios
+│   ├── auth.controller.js       # Lógica de login y refresh token
+│   ├── movie.controller.js      # Lógica CRUD de películas
+│   └── user.controller.js       # Lógica CRUD de usuarios
 ├── middlewares/
-│   ├── auth.middleware.js      # Verificación de token y rol admin
-│   └── logger.middleware.js    # Log de peticiones
+│   ├── auth.middleware.js       # Verificación de token y rol admin
+│   └── logger.middleware.js     # Log de peticiones HTTP
 ├── models/
-│   ├── User.js                 # Esquema de usuario
-│   └── Movie.js                # Esquema de película
+│   ├── User.js                  # Esquema de usuario
+│   └── Movie.js                 # Esquema de película
 ├── routes/
-│   ├── auth.routes.js          # Rutas de autenticación
-│   ├── movie.routes.js         # Rutas de películas
-│   └── user.routes.js          # Rutas de usuarios
+│   ├── auth.routes.js           # Rutas de autenticación
+│   ├── movie.routes.js          # Rutas de películas
+│   └── user.routes.js           # Rutas de usuarios
 ├── services/
-│   ├── auth.service.js         # Servicios de autenticación
-│   ├── movie.service.js        # Servicios de películas
-│   └── user.service.js         # Servicios de usuarios
-├── .env                        # Variables de entorno (no subir a GitHub)
-├── .env.example                # Ejemplo de variables de entorno
-├── seed.js                     # Script para poblar la base de datos
-└── server.js                   # Punto de entrada del servidor
+│   ├── auth.service.js          # Servicios de autenticación
+│   ├── movie.service.js         # Servicios de películas
+│   └── user.service.js          # Servicios de usuarios
+├── frontend/
+│   ├── js/
+│   │   └── auth.js              # Helper reutilizable de autenticación
+│   ├── login.html               # Página de inicio de sesión
+│   ├── register.html            # Página de registro
+│   └── dashboard.html           # Panel de control
+├── .env                         # Variables de entorno (no subir a GitHub)
+├── .env.example                 # Plantilla de variables de entorno
+├── seed.js                      # Script para poblar la base de datos
+└── server.js                    # Punto de entrada del servidor
 ```
 
 ---
 
 ## ⚙️ Instalación y Configuración
 
+### Requisitos previos
+
+- Node.js v18+
+- MongoDB instalado y corriendo localmente
+
 ### 1. Clonar el repositorio
+
 ```bash
-git clone https://github.com/tu-usuario/cine-jwt.git
-cd cine-jwt
+git clone https://github.com/Waly666/cine-jw-frontend.git
+cd cine-jw-frontend
 ```
 
 ### 2. Instalar dependencias
+
 ```bash
 npm install
 ```
 
 ### 3. Configurar variables de entorno
-Crea un archivo `.env` en la raíz del proyecto con el siguiente contenido:
+
+Crea un archivo `.env` en la raíz del proyecto basándote en `.env.example`:
+
 ```
 PORT=3000
 MONGO_URI=mongodb://localhost:27017/cineDB
@@ -77,37 +104,41 @@ SECRET_KEY=claveCine_123
 REFRESH_SECRET_KEY=refreshClaveCine_456
 ```
 
-### 4. Iniciar MongoDB
-Asegúrate de tener MongoDB instalado y corriendo localmente.
+### 4. Poblar la base de datos (opcional)
 
-### 5. Poblar la base de datos (opcional)
 ```bash
 node seed.js
 ```
 
-### 6. Iniciar el servidor
+### 5. Iniciar el servidor
+
 ```bash
 node server.js
 ```
 
 Deberías ver:
+
 ```
 Conectado a MongoDB ✅
 Servidor escuchando en el puerto 3000 ✅
 ```
 
+### 6. Abrir el frontend
+
+Abre `frontend/login.html` en tu navegador con un servidor local como Live Server de VS Code.
+
 ---
 
 ## 🔐 Variables de Entorno
 
-| Variable | Descripción | Ejemplo |
-|----------|-------------|---------|
-| `PORT` | Puerto del servidor | `3000` |
-| `MONGO_URI` | URI de conexión a MongoDB | `mongodb://localhost:27017/cineDB` |
-| `SECRET_KEY` | Clave secreta para Access Token | `claveCine_123` |
-| `REFRESH_SECRET_KEY` | Clave secreta para Refresh Token | `refreshClaveCine_456` |
+| Variable             | Descripción                      | Ejemplo                            |
+| -------------------- | -------------------------------- | ---------------------------------- |
+| `PORT`               | Puerto del servidor              | `3000`                             |
+| `MONGO_URI`          | URI de conexión a MongoDB        | `mongodb://localhost:27017/cineDB` |
+| `SECRET_KEY`         | Clave secreta para Access Token  | `claveCine_123`                    |
+| `REFRESH_SECRET_KEY` | Clave secreta para Refresh Token | `refreshClaveCine_456`             |
 
-> ⚠️ **Nunca subas el archivo `.env` a GitHub.** Agrégalo al `.gitignore`.
+> ⚠️ **Nunca subas el archivo `.env` a GitHub.** Está incluido en `.gitignore`.
 
 ---
 
@@ -115,12 +146,13 @@ Servidor escuchando en el puerto 3000 ✅
 
 ### 🔑 Autenticación — `/auth`
 
-| Método | Ruta | Descripción | Auth requerida |
-|--------|------|-------------|----------------|
-| POST | `/auth/login` | Iniciar sesión | No |
-| POST | `/auth/refresh` | Renovar access token | No |
+| Método | Ruta            | Descripción          | Auth |
+| ------ | --------------- | -------------------- | ---- |
+| POST   | `/auth/login`   | Iniciar sesión       | No   |
+| POST   | `/auth/refresh` | Renovar access token | No   |
 
 **POST `/auth/login`**
+
 ```json
 // Body
 {
@@ -137,6 +169,7 @@ Servidor escuchando en el puerto 3000 ✅
 ```
 
 **POST `/auth/refresh`**
+
 ```json
 // Body
 {
@@ -153,79 +186,136 @@ Servidor escuchando en el puerto 3000 ✅
 
 ### 🎬 Películas — `/movies`
 
-| Método | Ruta | Descripción | Auth requerida | Rol |
-|--------|------|-------------|----------------|-----|
-| GET | `/movies` | Listar todas las películas | ✅ | user/admin |
-| POST | `/movies/add` | Agregar película | ✅ | admin |
-| PUT | `/movies/edit/:id` | Editar película | ✅ | admin |
-| DELETE | `/movies/delete/:id` | Eliminar película | ✅ | admin |
+| Método | Ruta                 | Descripción                | Auth | Rol        |
+| ------ | -------------------- | -------------------------- | ---- | ---------- |
+| GET    | `/movies`            | Listar todas las películas | ✅   | user/admin |
+| POST   | `/movies/add`        | Agregar película           | ✅   | admin      |
+| PUT    | `/movies/edit/:id`   | Editar película            | ✅   | admin      |
+| DELETE | `/movies/delete/:id` | Eliminar película          | ✅   | admin      |
 
-**GET `/movies`** — Header requerido:
-```
-Authorization: Bearer <accessToken>
-```
+**Campos de película:**
 
-**POST `/movies/add`**
 ```json
-// Body
 {
-    "title": "Interstellar",
-    "director": "Christopher Nolan",
-    "genre": "Sci-Fi",
-    "imagen": "https://url-de-la-imagen.jpg",
-    "trailer": "https://youtube.com/watch?v=...",
-    "resumen": "Descripción de la película..."
+  "title": "Interstellar",
+  "director": "Christopher Nolan",
+  "genre": "Sci-Fi",
+  "imagen": "https://url-del-poster.jpg",
+  "trailer": "https://youtube.com/watch?v=...",
+  "resumen": "Descripción de la película..."
 }
 ```
+
+**Géneros disponibles:**
+`Action`, `Comedy`, `Drama`, `Horror`, `Sci-Fi`, `Romance`, `Thriller`, `Fantasy`, `Western`, `Musical`, `Documentary`, `War`, `Historical`, `Animation`
 
 ---
 
 ### 👤 Usuarios — `/users`
 
-| Método | Ruta | Descripción | Auth requerida | Rol |
-|--------|------|-------------|----------------|-----|
-| GET | `/users` | Listar todos los usuarios | ✅ | admin |
-| POST | `/users/register` | Registrar usuario | No | - |
-| PUT | `/users/edit/:id` | Editar usuario | ✅ | admin |
-| DELETE | `/users/delete/:id` | Eliminar usuario | ✅ | admin |
+| Método | Ruta                | Descripción               | Auth | Rol   |
+| ------ | ------------------- | ------------------------- | ---- | ----- |
+| GET    | `/users`            | Listar todos los usuarios | ✅   | admin |
+| POST   | `/users/register`   | Registrar usuario         | No   | —     |
+| PUT    | `/users/edit/:id`   | Editar usuario            | ✅   | admin |
+| DELETE | `/users/delete/:id` | Eliminar usuario          | ✅   | admin |
 
 **POST `/users/register`**
+
 ```json
-// Body
 {
-    "username": "carlos",
-    "password": "carlos123",
-    "role": "user"
+  "username": "carlos",
+  "password": "carlos123",
+  "role": "user"
 }
 ```
 
 ---
 
-## 🔒 Seguridad
+## 🖥️ Frontend
 
-- Las contraseñas se encriptan con **bcrypt** (10 rondas de sal)
-- Los tokens de acceso expiran en **20 minutos**
-- Los refresh tokens expiran en **7 días**
-- Las rutas protegidas requieren el header: `Authorization: Bearer <token>`
-- Solo los usuarios con rol **admin** pueden agregar, editar o eliminar películas y usuarios
+### Páginas
+
+| Archivo          | Descripción                                               |
+| ---------------- | --------------------------------------------------------- |
+| `login.html`     | Inicio de sesión con diseño cinematográfico               |
+| `register.html`  | Registro de nuevos usuarios con validación en tiempo real |
+| `dashboard.html` | Panel de control con gestión completa                     |
+
+### `auth.js` — Helper de autenticación
+
+Archivo reutilizable que expone las siguientes funciones:
+
+```javascript
+getToken(); // Obtiene el access token del localStorage
+getRefreshToken(); // Obtiene el refresh token del localStorage
+decodeToken(token); // Decodifica el payload del JWT
+isTokenExpired(token); // Verifica si el token expiró
+getCurrentUser(); // Retorna el usuario actual decodificado
+isAdmin(); // Retorna true si el usuario es admin
+refreshAccessToken(); // Renueva el access token automáticamente
+apiFetch(url, opts); // Fetch autenticado con refresh automático
+requireAuth(); // Redirige a login si no está autenticado
+redirectIfLoggedIn(); // Redirige al dashboard si ya está logueado
+logout(); // Limpia tokens y redirige a login
+```
+
+### Dashboard — Funcionalidades por rol
+
+| Funcionalidad            | User | Admin |
+| ------------------------ | ---- | ----- |
+| Ver listado de películas | ✅   | ✅    |
+| Ver tráiler de películas | ✅   | ✅    |
+| Agregar película         | ❌   | ✅    |
+| Editar película          | ❌   | ✅    |
+| Eliminar película        | ❌   | ✅    |
+| Ver listado de usuarios  | ❌   | ✅    |
+| Agregar usuario          | ❌   | ✅    |
+| Editar usuario           | ❌   | ✅    |
+| Eliminar usuario         | ❌   | ✅    |
+| Ver estadísticas         | ❌   | ✅    |
 
 ---
 
-## 👥 Usuarios de Prueba
+## 🔒 Seguridad
 
-| Username | Password | Rol |
-|----------|----------|-----|
-| walter | WALTER123 | admin |
-| julian | julian456 | user |
-| sandra | sandra789 | user |
-| pedro | pedro321 | user |
-| santiago | santiago987 | user |
+- Contraseñas encriptadas con **bcrypt** (10 rondas de sal)
+- **Access Token** expira en 20 minutos
+- **Refresh Token** expira en 7 días
+- Rutas protegidas requieren header: `Authorization: Bearer <token>`
+- Solo usuarios con rol **admin** pueden gestionar películas y usuarios
+- El frontend renueva el token automáticamente sin interrumpir la sesión
+- Las variables sensibles se gestionan con **dotenv**
+- **CORS** habilitado para comunicación frontend ↔ backend
 
 ---
 
 ## 📝 Middleware de Logs
 
-Cada petición al servidor genera un log en la terminal con el siguiente formato:
+Cada petición al servidor genera un log en la terminal:
+
 ```
-[2025-03-05T10:30:00.000Z] GET /movies - IP: ::1
+[2026-03-06T10:30:00.000Z] POST /auth/login - IP: ::1
+[2026-03-06T10:30:05.000Z] GET /movies - IP: ::1
+```
+
+---
+
+## 👥 Usuarios de Prueba
+
+| Username | Password    | Rol   |
+| -------- | ----------- | ----- |
+| walter   | WALTER123   | admin |
+| julian   | julian456   | user  |
+| sandra   | sandra789   | user  |
+| pedro    | pedro321    | user  |
+| santiago | santiago987 | user  |
+
+---
+
+## 🚀 Scripts disponibles
+
+```bash
+node server.js   # Inicia el servidor
+node seed.js     # Pobla la base de datos con datos iniciales
 ```
