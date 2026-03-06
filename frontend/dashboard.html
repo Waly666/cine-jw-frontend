@@ -289,6 +289,10 @@
             text-transform: uppercase;
             color: var(--text-muted);
             margin-top: 0.2rem;
+            body.light-mode .stat-label {
+            color: #0a0f2e !important;
+            opacity: 1 !important;
+}
         }
 
         /* TABLE */
@@ -846,26 +850,27 @@
         .badge-inactive { background: rgba(180,200,255,0.08); color: var(--text-muted); border: 1px solid rgba(180,200,255,0.15); }
         /* ===================== LIGHT MODE ===================== */
         body.light-mode {
-            background: #f0f4ff;
+                background: #c8d4e8;
             color: #1a2040;
+            --text-muted: #2a3560;
+            --text-main: #0a0f2e;
         }
 
         body.light-mode .sidebar {
-            background: #ffffff;
-            border-right: 1px solid rgba(74,158,255,0.15);
+            background: var(--sidebar-bg);
+            border-right: 1px solid var(--border);
         }
 
-        body.light-mode .logo-title { color: #1a2040; }
-        body.light-mode .logo-sub   { color: rgba(26,32,64,0.5); }
-
-        body.light-mode .user-name  { color: #1a2040; }
+        body.light-mode .logo-title { color: var(--text-main); }
+        body.light-mode .logo-sub   { color: var(--text-muted); }
+        body.light-mode .user-name  { color: var(--text-main); }
 
         body.light-mode .nav-item {
-            color: rgba(26,32,64,0.5);
+            color: var(--text-muted);
         }
 
         body.light-mode .nav-item:hover {
-            color: #1a2040;
+            color: var(--text-main);
             background: rgba(74,158,255,0.08);
         }
 
@@ -875,63 +880,63 @@
         }
 
         body.light-mode .topbar {
-            background: rgba(255,255,255,0.9);
-            border-bottom: 1px solid rgba(74,158,255,0.15);
+            background: #1a2540;
+            border-bottom: 1px solid rgba(74,158,255,0.2);
         }
 
-        body.light-mode .page-title { color: #1a2040; }
+        body.light-mode .page-title { color: #e8f0ff; }
 
         body.light-mode .table-wrapper {
-            background: #ffffff;
-            border: 1px solid rgba(74,158,255,0.15);
+            background: #dce6f5;
+            border: 1px solid rgba(74,158,255,0.2);
         }
 
         body.light-mode .table-header {
-            border-bottom: 1px solid rgba(74,158,255,0.1);
+            border-bottom: 1px solid rgba(74,158,255,0.15);
         }
 
-        body.light-mode .table-title { color: rgba(26,32,64,0.5); }
+        body.light-mode .table-title { color: rgba(26,32,64,0.6); }
 
         body.light-mode thead th {
-            background: rgba(74,158,255,0.05);
-            color: rgba(26,32,64,0.5);
-            border-bottom: 1px solid rgba(74,158,255,0.1);
+            background: rgba(74,158,255,0.08);
+            color: rgba(26,32,64,0.6);
+            border-bottom: 1px solid rgba(74,158,255,0.12);
         }
 
         body.light-mode tbody tr {
-            border-bottom: 1px solid rgba(74,158,255,0.08);
+            border-bottom: 1px solid rgba(74,158,255,0.1);
         }
 
         body.light-mode tbody tr:hover {
-            background: rgba(74,158,255,0.04);
+            background: rgba(74,158,255,0.06);
         }
 
         body.light-mode tbody td { color: #1a2040; }
-        body.light-mode .td-muted { color: rgba(26,32,64,0.5); }
+        body.light-mode .td-muted { color: rgba(26,32,64,0.55); }
 
         body.light-mode .stat-card {
-            background: #ffffff;
-            border: 1px solid rgba(74,158,255,0.15);
+            background: #dce6f5;
+            border: 1px solid rgba(74,158,255,0.2);
         }
 
         body.light-mode .stat-value { color: #1a2040; }
 
         body.light-mode .search-input {
-            background: rgba(74,158,255,0.05);
-            border: 1px solid rgba(74,158,255,0.2);
+            background: rgba(74,158,255,0.08);
+            border: 1px solid rgba(74,158,255,0.25);
             color: #1a2040;
         }
 
         body.light-mode .search-input::placeholder { color: rgba(26,32,64,0.4); }
 
-        body.light-mode .modal { background: #ffffff; }
+        body.light-mode .modal { background: #dce6f5; }
         body.light-mode .modal-title { color: #1a2040; }
 
         body.light-mode .form-input,
         body.light-mode .form-select,
         body.light-mode .form-textarea {
-            background: rgba(74,158,255,0.05);
-            border: 1px solid rgba(74,158,255,0.2);
+            background: rgba(74,158,255,0.08);
+            border: 1px solid rgba(74,158,255,0.25);
             color: #1a2040;
         }
 
@@ -939,22 +944,82 @@
         body.light-mode .form-textarea::placeholder { color: rgba(26,32,64,0.4); }
 
         body.light-mode .plan-card {
-            background: #ffffff;
-            border: 1px solid rgba(74,158,255,0.15);
+            background: #dce6f5;
+            border: 1px solid rgba(74,158,255,0.2);
         }
 
         body.light-mode .plan-name  { color: #1a2040; }
 
         body.light-mode .subscription-card {
-            background: #ffffff;
-            border: 1px solid rgba(74,158,255,0.15);
+            background: #dce6f5;
+            border: 1px solid rgba(74,158,255,0.2);
         }
 
-        body.light-mode .subscription-dates { color: rgba(26,32,64,0.5); }
+        body.light-mode .subscription-dates { color: rgba(26,32,64,0.55); }
 
-        body.light-mode .sidebar-footer { border-top: 1px solid rgba(74,158,255,0.15); }
-        body.light-mode .sidebar-user   { border-bottom: 1px solid rgba(74,158,255,0.15); }
-        body.light-mode .sidebar-logo   { border-bottom: 1px solid rgba(74,158,255,0.15); }
+        body.light-mode .sidebar-footer { border-top: 1px solid var(--border); }
+        body.light-mode .sidebar-user   { border-bottom: 1px solid var(--border); }
+        body.light-mode .sidebar-logo   { border-bottom: 1px solid var(--border); }
+
+        body.light-mode .btn-add {
+            background: linear-gradient(135deg, var(--blue-dark), var(--blue));
+        /* Textos más oscuros en modo claro */
+        body.light-mode .stat-label { color: #2a3560; }
+        body.light-mode .stat-value { color: #0d1530; font-weight: 800; }
+
+        body.light-mode thead th {
+            background: rgba(74,158,255,0.08);
+            color: #0d1530;
+            font-weight: 700;
+            border-bottom: 1px solid rgba(74,158,255,0.12);
+        }
+
+        body.light-mode tbody td { color: #0d1530; font-weight: 500; }
+        body.light-mode tbody td strong { color: #050810; font-weight: 700; }
+        body.light-mode .td-muted { color: #2a3560; font-weight: 500; }
+
+        body.light-mode .table-title { color: #0d1530; font-weight: 700; }
+
+        body.light-mode .plan-name  { color: #0d1530; font-weight: 700; }
+        body.light-mode .plan-limit { color: #2a3560; }
+        body.light-mode .plan-price { color: var(--blue-dark); }
+        body.light-mode .plan-price span { color: #2a3560; }
+
+        body.light-mode .subscription-plan  { color: var(--blue-dark); font-weight: 700; }
+        body.light-mode .subscription-title { color: #2a3560; font-weight: 600; }
+        body.light-mode .subscription-dates { color: #2a3560; font-weight: 500; }
+
+        body.light-mode .modal-title { color: #0d1530; font-weight: 700; }
+        body.light-mode .form-label  { color: #0d1530; font-weight: 600; }
+
+        body.light-mode .form-input,
+        body.light-mode .form-select,
+        body.light-mode .form-textarea { color: #0d1530; }
+
+        body.light-mode .page-title { color: #e8f0ff; font-weight: 700; }   
+        body.light-mode .stat-card { background: #c0cfe6; }
+        body.light-mode .stat-label { color: #0d1530 !important; font-weight: 600; }
+        body.light-mode .stat-value { color: #050810 !important; font-weight: 800; }
+        body.light-mode .stat-icon  { background: rgba(74,158,255,0.15); }
+        body.light-mode .stat-card .stat-label {
+            color: #0a0f2e !important;
+            font-weight: 700 !important;
+            opacity: 1 !important;
+        }
+
+        body.light-mode .stat-card .stat-value {
+            color: #0a0f2e !important;
+            font-weight: 800 !important;
+            opacity: 1 !important;
+        }
+
+        body.light-mode .stat-card > div {
+            color: #0a0f2e !important;
+        }
+        body.light-mode .stat-card * {
+            color: #0a0f2e !important;
+}
+        }
 
         /* FLOATING BUTTON */
         .theme-toggle {

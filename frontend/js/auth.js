@@ -1,4 +1,6 @@
-const API_URL = 'http://72.60.175.120:4000';
+const API_URL = window.location.hostname === 'localhost' 
+    ? 'http://localhost:3000' 
+    : 'http://72.60.175.120:4000';
 
 // ========================
 // TOKEN HELPERS
