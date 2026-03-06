@@ -62,7 +62,6 @@ async function refreshAccessToken() {
 async function apiFetch(url, options = {}) {
     let token = getToken();
 
-    // Si el token expiró, intentar refresh antes de la petición
     if (token && isTokenExpired(token)) {
         try {
             token = await refreshAccessToken();
@@ -81,14 +80,20 @@ async function apiFetch(url, options = {}) {
         }
     });
 
-    // Si el servidor rechaza el token, intentar refresh
+    // Solo intentar refresh si el mensaje es de token expirado
+    // NO hacer refresh si es por suscripción
     if (res.status === 403) {
-        try {
-            token = await refreshAccessToken();
-            return apiFetch(url, options);
-        } catch {
-            logout();
-            return;
+        const data = await res.clone().json();
+        const isTokenError = data.message?.toLowerCase().includes('token');
+        
+        if (isTokenError) {
+            try {
+                token = await refreshAccessToken();
+                return apiFetch(url, options);
+            } catch {
+                logout();
+                return;
+            }
         }
     }
 

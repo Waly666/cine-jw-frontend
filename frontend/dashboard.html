@@ -671,6 +671,315 @@
         }
         .empty-state svg { margin-bottom: 0.75rem; opacity: 0.4; }
         .empty-state p { font-size: 0.88rem; }
+        /* ===================== PLANS ===================== */
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .plan-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1.75rem 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .plan-card:hover {
+            border-color: var(--blue);
+            box-shadow: 0 8px 24px rgba(74,158,255,0.15);
+            transform: translateY(-3px);
+        }
+
+        .plan-card.active-plan {
+            border-color: var(--blue);
+            box-shadow: 0 0 0 2px rgba(74,158,255,0.2);
+        }
+
+        .plan-card.active-plan::before {
+            content: 'PLAN ACTIVO';
+            position: absolute;
+            top: 12px;
+            right: -22px;
+            background: var(--blue);
+            color: #fff;
+            font-size: 0.55rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            padding: 0.2rem 2rem;
+            transform: rotate(45deg);
+        }
+
+        .plan-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+        }
+
+        .plan-price {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--blue);
+            line-height: 1;
+            margin-bottom: 0.25rem;
+        }
+
+        .plan-price span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+
+        .plan-limit {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-bottom: 1.25rem;
+            padding-bottom: 1.25rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .btn-subscribe {
+            width: 100%;
+            padding: 0.7rem;
+            background: linear-gradient(135deg, var(--blue-dark), var(--blue));
+            border: none;
+            border-radius: 3px;
+            color: #fff;
+            font-family: 'Raleway', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-subscribe:hover {
+            box-shadow: 0 4px 14px rgba(74,158,255,0.35);
+        }
+
+        .btn-subscribe:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        /* SUBSCRIPTION STATUS CARD */
+        .subscription-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .subscription-info { flex: 1; }
+
+        .subscription-title {
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 0.35rem;
+        }
+
+        .subscription-plan {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--blue);
+        }
+
+        .subscription-dates {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        .subscription-actions { display: flex; gap: 0.5rem; }
+
+        .btn-renew {
+            padding: 0.6rem 1.25rem;
+            background: linear-gradient(135deg, var(--blue-dark), var(--blue));
+            border: none;
+            border-radius: 3px;
+            color: #fff;
+            font-family: 'Raleway', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-renew:hover { box-shadow: 0 4px 14px rgba(74,158,255,0.35); }
+
+        .btn-cancel-sub {
+            padding: 0.6rem 1.25rem;
+            background: rgba(224,92,92,0.1);
+            border: 1px solid rgba(224,92,92,0.3);
+            border-radius: 3px;
+            color: #e05c5c;
+            font-family: 'Raleway', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-cancel-sub:hover { background: rgba(224,92,92,0.2); }
+
+        .badge-active   { background: rgba(76,175,130,0.15); color: #4caf82; border: 1px solid rgba(76,175,130,0.3); }
+        .badge-expired  { background: rgba(224,92,92,0.15);  color: #e05c5c; border: 1px solid rgba(224,92,92,0.3); }
+        .badge-inactive { background: rgba(180,200,255,0.08); color: var(--text-muted); border: 1px solid rgba(180,200,255,0.15); }
+        /* ===================== LIGHT MODE ===================== */
+        body.light-mode {
+            background: #f0f4ff;
+            color: #1a2040;
+        }
+
+        body.light-mode .sidebar {
+            background: #ffffff;
+            border-right: 1px solid rgba(74,158,255,0.15);
+        }
+
+        body.light-mode .logo-title { color: #1a2040; }
+        body.light-mode .logo-sub   { color: rgba(26,32,64,0.5); }
+
+        body.light-mode .user-name  { color: #1a2040; }
+
+        body.light-mode .nav-item {
+            color: rgba(26,32,64,0.5);
+        }
+
+        body.light-mode .nav-item:hover {
+            color: #1a2040;
+            background: rgba(74,158,255,0.08);
+        }
+
+        body.light-mode .nav-item.active {
+            color: var(--blue);
+            background: rgba(74,158,255,0.1);
+        }
+
+        body.light-mode .topbar {
+            background: rgba(255,255,255,0.9);
+            border-bottom: 1px solid rgba(74,158,255,0.15);
+        }
+
+        body.light-mode .page-title { color: #1a2040; }
+
+        body.light-mode .table-wrapper {
+            background: #ffffff;
+            border: 1px solid rgba(74,158,255,0.15);
+        }
+
+        body.light-mode .table-header {
+            border-bottom: 1px solid rgba(74,158,255,0.1);
+        }
+
+        body.light-mode .table-title { color: rgba(26,32,64,0.5); }
+
+        body.light-mode thead th {
+            background: rgba(74,158,255,0.05);
+            color: rgba(26,32,64,0.5);
+            border-bottom: 1px solid rgba(74,158,255,0.1);
+        }
+
+        body.light-mode tbody tr {
+            border-bottom: 1px solid rgba(74,158,255,0.08);
+        }
+
+        body.light-mode tbody tr:hover {
+            background: rgba(74,158,255,0.04);
+        }
+
+        body.light-mode tbody td { color: #1a2040; }
+        body.light-mode .td-muted { color: rgba(26,32,64,0.5); }
+
+        body.light-mode .stat-card {
+            background: #ffffff;
+            border: 1px solid rgba(74,158,255,0.15);
+        }
+
+        body.light-mode .stat-value { color: #1a2040; }
+
+        body.light-mode .search-input {
+            background: rgba(74,158,255,0.05);
+            border: 1px solid rgba(74,158,255,0.2);
+            color: #1a2040;
+        }
+
+        body.light-mode .search-input::placeholder { color: rgba(26,32,64,0.4); }
+
+        body.light-mode .modal { background: #ffffff; }
+        body.light-mode .modal-title { color: #1a2040; }
+
+        body.light-mode .form-input,
+        body.light-mode .form-select,
+        body.light-mode .form-textarea {
+            background: rgba(74,158,255,0.05);
+            border: 1px solid rgba(74,158,255,0.2);
+            color: #1a2040;
+        }
+
+        body.light-mode .form-input::placeholder,
+        body.light-mode .form-textarea::placeholder { color: rgba(26,32,64,0.4); }
+
+        body.light-mode .plan-card {
+            background: #ffffff;
+            border: 1px solid rgba(74,158,255,0.15);
+        }
+
+        body.light-mode .plan-name  { color: #1a2040; }
+
+        body.light-mode .subscription-card {
+            background: #ffffff;
+            border: 1px solid rgba(74,158,255,0.15);
+        }
+
+        body.light-mode .subscription-dates { color: rgba(26,32,64,0.5); }
+
+        body.light-mode .sidebar-footer { border-top: 1px solid rgba(74,158,255,0.15); }
+        body.light-mode .sidebar-user   { border-bottom: 1px solid rgba(74,158,255,0.15); }
+        body.light-mode .sidebar-logo   { border-bottom: 1px solid rgba(74,158,255,0.15); }
+
+        /* FLOATING BUTTON */
+        .theme-toggle {
+            position: fixed;
+            bottom: 2rem;
+            left: calc(var(--sidebar-width) + 1.5rem);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--blue-dark), var(--blue));
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 16px rgba(74,158,255,0.4);
+            z-index: 150;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(74,158,255,0.5);
+        }
     </style>
 </head>
 <body>
@@ -689,6 +998,12 @@
                 <div class="user-role" id="userRole">—</div>
             </div>
         </div>
+        <div class="nav-item" data-section="subscriptions" onclick="switchSection('subscriptions')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20 4H4c-1.11 0-2 .89-2 2v12c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
+                </svg>
+                Suscripciones
+            </div>
 
         <nav class="sidebar-nav">
             <div class="nav-section-title">Contenido</div>
@@ -791,6 +1106,46 @@
                     </table>
                 </div>
             </div>
+            <!-- SUBSCRIPTIONS SECTION -->
+                <div class="section" id="section-subscriptions">
+
+                    <!-- ESTADO SUSCRIPCIÓN ACTIVA -->
+                    <div id="subscriptionStatus" style="margin-bottom:1.5rem;"></div>
+
+                    <!-- TARJETAS DE PLANES -->
+                    <div id="plansGrid" style="margin-bottom:2rem;"></div>
+
+                    <!-- TABLA ADMIN -->
+                    <div id="allSubscriptionsTable" style="display:none;">
+                        <div class="table-wrapper">
+                            <div class="table-header">
+                                <span class="table-title">Todas las Suscripciones</span>
+                            </div>
+                            <table id="subscriptions-table">
+                                <thead>
+                                    <tr>
+                                        <th onclick="sortTable('subscriptions-table', 0)" style="cursor:pointer;">Usuario ↕</th>
+                                        <th onclick="sortTable('subscriptions-table', 1)" style="cursor:pointer;">Plan ↕</th>
+                                        <th onclick="sortTable('subscriptions-table', 2)" style="cursor:pointer;">Fecha Inicio ↕</th>
+                                        <th onclick="sortTable('subscriptions-table', 3)" style="cursor:pointer;">Fecha Vencimiento ↕</th>
+                                        <th onclick="sortTable('subscriptions-table', 4)" style="cursor:pointer;">Estado ↕</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="subscriptions-body">
+                                    <tr class="loading-row">
+                                        <td colspan="5">
+                                            <div class="spinner-inline"></div>
+                                            Cargando suscripciones...
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
 
         </div>
     </main>
@@ -912,7 +1267,49 @@
             </div>
         </div>
     </div>
-
+    <!-- MODAL EDITAR SUSCRIPCIÓN -->
+    <div class="modal-overlay" id="subscriptionModal">
+        <div class="modal" style="max-width:420px;">
+            <div class="modal-header">
+                <div class="modal-title">Editar Suscripción</div>
+                <button class="modal-close" onclick="closeModal('subscriptionModal')">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="subId">
+                <div class="form-group">
+                    <label class="form-label">Plan</label>
+                    <select class="form-select" id="subPlanSelect">
+                        <option value="">Cargando planes...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Fecha de Vencimiento</label>
+                    <input type="date" class="form-input" id="subFechaFin">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Estado</label>
+                    <select class="form-select" id="subActiva">
+                        <option value="true">Activa</option>
+                        <option value="false">Inactiva</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" onclick="closeModal('subscriptionModal')">Cancelar</button>
+                <button class="btn-save" onclick="saveSubscription()">Guardar</button>
+            </div>
+        </div>
+    </div>
+        <!-- THEME TOGGLE -->
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Cambiar modo">
+        <svg id="themeIcon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/>
+        </svg>
+    </button>
     <!-- ===== TOAST ===== -->
     <div class="toast" id="toast"></div>
 
@@ -962,6 +1359,7 @@
             document.getElementById('pageTitle').textContent = titles[section];
 
             if (section === 'users') loadUsers();
+            if (section === 'subscriptions') loadSubscriptions();
         }
 
         // ========================
@@ -1024,8 +1422,36 @@
         // MOVIES
         // ========================
         async function loadMovies() {
+            
             const tbody = document.getElementById('movies-body');
             tbody.innerHTML = `<tr class="loading-row"><td colspan="5"><div class="spinner-inline"></div>Cargando...</td></tr>`;
+             // Verificar suscripción si no es admin
+            if (!isAdmin()) {
+                const subRes = await apiFetch('/subscriptions/my-subscription');
+                if (subRes.status === 404 || subRes.status === 403) {
+                    tbody.innerHTML = `
+                        <tr>
+                            <td colspan="5">
+                                <div class="empty-state">
+                                    <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor" style="color:var(--text-muted)">
+                                        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+                                    </svg>
+                                    <p style="margin-top:0.5rem;">Necesitas una suscripción activa para ver las películas.</p>
+                                    <button onclick="switchSection('subscriptions')" style="
+                                        margin-top:1rem;
+                                        padding: 0.6rem 1.25rem;
+                                        background: linear-gradient(135deg, var(--blue-dark), var(--blue));
+                                        border: none; border-radius: 3px; color: #fff;
+                                        font-family: 'Raleway', sans-serif; font-size: 0.78rem;
+                                        font-weight: 700; cursor: pointer;
+                                    ">Ver Planes</button>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                    return;
+                }
+            }
 
             try {
                 const res  = await apiFetch('/movies');
@@ -1241,16 +1667,23 @@
         }
 
         async function deleteItem(type, id) {
-            const url = type === 'movie' ? `/movies/delete/${id}` : `/users/delete/${id}`;
+            const urls = {
+                movie:        `/movies/delete/${id}`,
+                user:         `/users/delete/${id}`,
+                subscription: `/subscriptions/${id}`
+            };
+
             try {
-                const res = await apiFetch(url, { method: 'DELETE' });
+                const res  = await apiFetch(urls[type], { method: 'DELETE' });
                 const data = await res.json();
                 if (!res.ok) { showToast(data.message, 'error'); return; }
 
                 closeModal('deleteModal');
                 showToast('Eliminado exitosamente ✅', 'success');
-                type === 'movie' ? loadMovies() : loadUsers();
-                loadStats();
+                if (type === 'movie')        loadMovies();
+                if (type === 'user')         loadUsers();
+                if (type === 'subscription') loadAllSubscriptions();
+                if (type !== 'subscription') loadStats();
             } catch {
                 showToast('Error al eliminar.', 'error');
             }
@@ -1298,10 +1731,282 @@
             clearTimeout(toastTimeout);
             toastTimeout = setTimeout(() => toast.classList.remove('show'), 3000);
         }
+        // ========================
+        // SUBSCRIPTIONS
+        // ========================
+        async function loadSubscriptions() {
+             // Cargar planes en el select del modal
+                const plansRes  = await apiFetch('/subscriptions/plans');
+                const plansData = await plansRes.json();
+                const select    = document.getElementById('subPlanSelect');
+                select.innerHTML = plansData.plans.map(p =>
+                    `<option value="${p._id}">${p.nombre} — $${p.precio}</option>`
+                ).join('');
+            if (isAdmin()) {
+                // Admin: ocultar status y planes, mostrar solo tabla
+                document.getElementById('subscriptionStatus').style.display = 'none';
+                document.getElementById('plansGrid').style.display = 'none';
+                document.getElementById('allSubscriptionsTable').style.display = 'block';
+                await loadAllSubscriptions();
+            } else {
+                // User: mostrar status y planes, ocultar tabla
+                document.getElementById('subscriptionStatus').style.display = 'block';
+                document.getElementById('plansGrid').style.display = 'block';
+                document.getElementById('allSubscriptionsTable').style.display = 'none';
+                await loadMySubscription();
+                await loadPlans();
+            }
+        }
 
+        async function loadMySubscription() {
+            const container = document.getElementById('subscriptionStatus');
+
+            try {
+                const res  = await apiFetch('/subscriptions/my-subscription');
+                const data = await res.json();
+
+                if (res.status === 404) {
+                    container.innerHTML = `
+                        <div class="subscription-card">
+                            <div class="subscription-info">
+                                <div class="subscription-title">Suscripción activa</div>
+                                <div class="subscription-plan" style="color:var(--text-muted);">Sin suscripción</div>
+                                <div class="subscription-dates">Elige un plan para comenzar</div>
+                            </div>
+                        </div>
+                    `;
+                    return;
+                }
+
+                const sub  = data.subscription;
+                const plan = sub.plan;
+                const fin  = new Date(sub.fechaFin).toLocaleDateString('es-ES', { day:'2-digit', month:'long', year:'numeric' });
+                const ini  = new Date(sub.fechaInicio).toLocaleDateString('es-ES', { day:'2-digit', month:'long', year:'numeric' });
+
+                container.innerHTML = `
+                    <div class="subscription-card">
+                        <div class="subscription-info">
+                            <div class="subscription-title">Suscripción activa</div>
+                            <div class="subscription-plan">${plan.nombre} — $${plan.precio}/mes</div>
+                            <div class="subscription-dates">
+                                📅 Inicio: ${ini} &nbsp;|&nbsp; ⏳ Vence: ${fin}
+                                &nbsp;|&nbsp; 🎬 Límite: ${plan.limiteRecursos === 0 ? 'Ilimitado' : plan.limiteRecursos + ' películas'}
+                            </div>
+                        </div>
+                        <div class="subscription-actions">
+                            <button class="btn-renew" onclick="renewSubscription()">Renovar</button>
+                            <button class="btn-cancel-sub" onclick="cancelSubscription()">Cancelar</button>
+                        </div>
+                    </div>
+                `;
+            } catch (err) {
+                container.innerHTML = `<p style="color:var(--error);">Error cargando suscripción.</p>`;
+            }
+        }
+
+        async function loadPlans() {
+            const container = document.getElementById('plansGrid');
+
+            try {
+                const res   = await apiFetch('/subscriptions/plans');
+                const data  = await res.json();
+                const plans = data.plans || [];
+
+                // Obtener plan activo del usuario
+                const subRes  = await apiFetch('/subscriptions/my-subscription');
+                const subData = await subRes.json();
+                const activePlanId = subData.subscription?.plan?._id || null;
+
+                container.innerHTML = `
+                    <div style="margin-bottom:1rem;">
+                        <span style="font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-muted);">
+                            Planes disponibles
+                        </span>
+                    </div>
+                    <div class="plans-grid">
+                        ${plans.map(p => `
+                            <div class="plan-card ${activePlanId === p._id ? 'active-plan' : ''}">
+                                <div class="plan-name">${p.nombre}</div>
+                                <div class="plan-price">$${p.precio}<span>/mes</span></div>
+                                <div class="plan-limit">
+                                    🎬 ${p.limiteRecursos === 0 ? 'Películas ilimitadas' : p.limiteRecursos + ' películas por mes'}
+                                </div>
+                                <div style="font-size:0.78rem;color:var(--text-muted);margin-bottom:1.25rem;">
+                                    ${p.descripcion || ''}
+                                </div>
+                                <button
+                                    class="btn-subscribe"
+                                    onclick="subscribeToPlan('${p._id}')"
+                                    ${activePlanId ? 'disabled' : ''}
+                                >
+                                    ${activePlanId === p._id ? 'Plan actual' : 'Suscribirse'}
+                                </button>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            } catch (err) {
+                container.innerHTML = `<p style="color:var(--error);">Error cargando planes.</p>`;
+            }
+        }
+
+        async function loadAllSubscriptions() {
+    const tbody = document.getElementById('subscriptions-body');
+    tbody.innerHTML = `<tr class="loading-row"><td colspan="6"><div class="spinner-inline"></div>Cargando...</td></tr>`;
+
+    try {
+        const res  = await apiFetch('/subscriptions');
+        const data = await res.json();
+        const subs = data.subscriptions || [];
+
+        if (!subs.length) {
+            tbody.innerHTML = `<tr><td colspan="6"><div class="empty-state"><p>No hay suscripciones registradas.</p></div></td></tr>`;
+            return;
+        }
+
+        tbody.innerHTML = subs.map(s => {
+            const fin     = new Date(s.fechaFin).toLocaleDateString('es-ES');
+            const ini     = new Date(s.fechaInicio).toLocaleDateString('es-ES');
+            const vencida = new Date(s.fechaFin) < new Date();
+            const estado  = !s.activa ? 'inactive' : vencida ? 'expired' : 'active';
+            const label   = !s.activa ? 'Cancelada' : vencida ? 'Vencida' : 'Activa';
+
+            return `
+                <tr data-search="${s.user?.username?.toLowerCase()} ${s.plan?.nombre?.toLowerCase()}">
+                    <td><strong>${s.user?.username || '—'}</strong></td>
+                    <td><span class="badge badge-genre">${s.plan?.nombre || '—'}</span></td>
+                    <td class="td-muted">${ini}</td>
+                    <td class="td-muted">${fin}</td>
+                    <td><span class="badge badge-${estado}">${label}</span></td>
+                    <td>
+                        <div class="actions">
+                            <button class="btn-icon btn-edit" onclick="openEditSubscriptionModal(${JSON.stringify(s).replace(/"/g, '&quot;')})">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+                            </button>
+                            <button class="btn-icon btn-delete" onclick="confirmDelete('subscription', '${s._id}', '${s.user?.username}')">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `;
+        }).join('');
+
+    } catch {
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--error);">Error al cargar suscripciones.</td></tr>`;
+    }
+}
+
+        async function subscribeToPlan(planId) {
+            try {
+                const res  = await apiFetch('/subscriptions/subscribe', {
+                    method: 'POST',
+                    body: JSON.stringify({ planId })
+                });
+                const data = await res.json();
+                if (!res.ok) { showToast(data.message, 'error'); return; }
+                showToast('¡Suscripción activada exitosamente! ✅', 'success');
+                loadSubscriptions();
+            } catch {
+                showToast('Error al suscribirse.', 'error');
+            }
+        }
+
+        async function renewSubscription() {
+            try {
+                const res  = await apiFetch('/subscriptions/renew', { method: 'PUT' });
+                const data = await res.json();
+                if (!res.ok) { showToast(data.message, 'error'); return; }
+                showToast('¡Suscripción renovada por 30 días! ✅', 'success');
+                loadSubscriptions();
+            } catch {
+                showToast('Error al renovar.', 'error');
+            }
+        }
+
+        async function cancelSubscription() {
+            try {
+                const res  = await apiFetch('/subscriptions/cancel', { method: 'PUT' });
+                const data = await res.json();
+                if (!res.ok) { showToast(data.message, 'error'); return; }
+                showToast('Suscripción cancelada.', 'success');
+                loadSubscriptions();
+            } catch {
+                showToast('Error al cancelar.', 'error');
+            }
+        }
+        // Ordenar tabla
+        function sortTable(tableId, col) {
+            const table = document.getElementById(tableId);
+            const tbody = table.querySelector('tbody');
+            const rows  = Array.from(tbody.querySelectorAll('tr[data-search]'));
+
+            const sorted = rows.sort((a, b) => {
+                const A = a.cells[col]?.textContent.trim().toLowerCase() || '';
+                const B = b.cells[col]?.textContent.trim().toLowerCase() || '';
+                return A.localeCompare(B);
+            });
+
+            sorted.forEach(row => tbody.appendChild(row));
+        }
+
+        // Abrir modal editar suscripción
+        function openEditSubscriptionModal(sub) {
+            document.getElementById('subId').value          = sub._id;
+            document.getElementById('subPlanSelect').value  = sub.plan?._id || '';
+            document.getElementById('subActiva').value      = sub.activa ? 'true' : 'false';
+            document.getElementById('subFechaFin').value    = new Date(sub.fechaFin).toISOString().split('T')[0];
+            openModal('subscriptionModal');
+        }
+
+        // Guardar edición suscripción
+        async function saveSubscription() {
+            const id      = document.getElementById('subId').value;
+            const activa  = document.getElementById('subActiva').value === 'true';
+            const fechaFin = document.getElementById('subFechaFin').value;
+            const planId  = document.getElementById('subPlanSelect').value;
+
+            try {
+                const res  = await apiFetch(`/subscriptions/${id}`, {
+                    method: 'PUT',
+                    body: JSON.stringify({ activa, fechaFin, planId })
+                });
+                const data = await res.json();
+                if (!res.ok) { showToast(data.message, 'error'); return; }
+
+                closeModal('subscriptionModal');
+                showToast('Suscripción actualizada ✅', 'success');
+                loadAllSubscriptions();
+            } catch {
+                showToast('Error al actualizar.', 'error');
+            }
+        }
+        // ========================
+        // THEME
+        // ========================
+        function toggleTheme() {
+            const isLight = document.body.classList.toggle('light-mode');
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            updateThemeIcon(isLight);
+        }
+
+        function updateThemeIcon(isLight) {
+            document.getElementById('themeIcon').innerHTML = isLight
+                ? '<path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58a.996.996 0 0 0-1.41 0 .996.996 0 0 0 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37a.996.996 0 0 0-1.41 0 .996.996 0 0 0 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0a.996.996 0 0 0 0-1.41l-1.06-1.06zm1.06-12.37l-1.06 1.06a.996.996 0 0 0 0 1.41c.39.39 1.03.39 1.41 0l1.06-1.06a.996.996 0 0 0 0-1.41.996.996 0 0 0-1.41 0zM7.05 18.36l-1.06 1.06a.996.996 0 0 0 0 1.41c.39.39 1.03.39 1.41 0l1.06-1.06a.996.996 0 0 0 0-1.41.996.996 0 0 0-1.41 0z"/>'
+                : '<path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/>';
+        }
+
+        function loadTheme() {
+            const saved = localStorage.getItem('theme');
+            if (saved === 'light') {
+                document.body.classList.add('light-mode');
+                updateThemeIcon(true);
+            }
+        }
         // ========================
         // START
         // ========================
+
         init();
     </script>
 </body>

@@ -9,6 +9,8 @@ router.get('/my-subscription',    authenticateToken,            controller.getMy
 router.post('/subscribe',         authenticateToken,            controller.subscribe);
 router.put('/renew',              authenticateToken,            controller.renew);
 router.put('/cancel',             authenticateToken,            controller.cancel);
+router.put('/:id',    authenticateToken, isAdmin, controller.updateById);
+router.delete('/:id', authenticateToken, isAdmin, controller.deleteById);
 
 // Solo admin
 router.get('/',                   authenticateToken, isAdmin,   controller.getAll);

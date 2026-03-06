@@ -58,5 +58,30 @@ async function cancel(req, res) {
         res.status(400).json({ message: err.message + ' MDFKs' });
     }
 }
+async function updateById(req, res) {
+    try {
+        const { activa, fechaFin, planId } = req.body;
+        const sub = await Subscription.findByIdAndUpdate(
+            req.params.id,
+            { activa, fechaFin, plan: planId },
+            { new: true }
+        ).populate('plan');
+        if (!sub) return res.status(404).json({ message: 'Suscripción no encontrada MDFKs' });
+        res.json({ message: 'Suscripción actualizada MDFKs', subscription: sub });
+    } catch (err) {
+        res.status(500).json({ message: err.message + ' MDFKs' });
+    }
+}
 
-module.exports = { getPlans, getMySubscription, getAll, subscribe, renew, cancel };
+async function deleteById(req, res) {
+    try {
+        const sub = await Subscription.findByIdAndDelete(req.params.id);
+        if (!sub) return res.status(404).json({ message: 'Suscripción no encontrada MDFKs' });
+        res.json({ message: 'Suscripción eliminada MDFKs' });
+    } catch (err) {
+        res.status(500).json({ message: err.message + ' MDFKs' });
+    }
+}
+
+// Agrégalos al module.exports:
+module.exports = { getPlans, getMySubscription, getAll, subscribe, renew, cancel, updateById, deleteById };

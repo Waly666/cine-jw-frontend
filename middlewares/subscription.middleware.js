@@ -2,24 +2,24 @@ const Subscription = require('../models/Subscription');
 
 async function checkSubscription(req, res, next) {
     try {
+        // Admin no necesita suscripción
+        if (req.user.role === 'admin') return next();
+
         const subscription = await Subscription.findOne({
             user:   req.user.id,
             activa: true
         }).populate('plan');
 
-        // Si no tiene suscripción activa
         if (!subscription) {
             return res.status(403).json({ message: 'No tienes una suscripción activa MDFKs' });
         }
 
-        // Verificar si venció
         if (new Date() > new Date(subscription.fechaFin)) {
             subscription.activa = false;
             await subscription.save();
             return res.status(403).json({ message: 'Tu suscripción ha vencido MDFKs' });
         }
 
-        // Adjuntar suscripción al request para usarla en otros middlewares
         req.subscription = subscription;
         next();
 
