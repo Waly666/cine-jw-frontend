@@ -1,10 +1,11 @@
 {
   "name": "cine-jwt-full-stack",
   "version": "1.0.0",
-  "description": "",
+  "description": "Aplicación web fullstack para gestión de una plataforma de películas online. Incluye autenticación JWT con refresh token, control de roles, motor de suscripciones con planes, encriptación de contraseñas y un dashboard interactivo con modo claro/oscuro.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
@@ -17,5 +18,14 @@
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.2.4"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Waly666/cine-jw-frontend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Waly666/cine-jw-frontend/issues"
+  },
+  "homepage": "https://github.com/Waly666/cine-jw-frontend#readme"
 }

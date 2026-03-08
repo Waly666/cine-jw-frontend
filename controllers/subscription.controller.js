@@ -1,4 +1,6 @@
+const Subscription = require('../models/Subscription');
 const subscriptionService = require('../services/subscription.service');
+//const Subscription = require('../models/Subscription'); // ← agrega esta línea
 
 async function getPlans(req, res) {
     try {

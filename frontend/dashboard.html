@@ -1543,7 +1543,7 @@
                         <td><span class="badge-genre">${m.genre || '—'}</span></td>
                         <td>
                             ${m.trailer
-                                ? `<a href="${m.trailer}" target="_blank" style="
+                                 ? `<a href="javascript:void(0)" onclick="watchTrailer('${m._id}', '${m.trailer}')"
                                     color: var(--blue);
                                     text-decoration: none;
                                     font-size: 0.8rem;
@@ -1824,50 +1824,59 @@
         }
 
         async function loadMySubscription() {
-            const container = document.getElementById('subscriptionStatus');
+                const container = document.getElementById('subscriptionStatus');
 
-            try {
-                const res  = await apiFetch('/subscriptions/my-subscription');
-                const data = await res.json();
+                try {
+                    const res  = await apiFetch('/subscriptions/my-subscription');
+                    const data = await res.json();
 
-                if (res.status === 404) {
+                    if (res.status === 404) {
+                        container.innerHTML = `
+                            <div class="subscription-card">
+                                <div class="subscription-info">
+                                    <div class="subscription-title">Suscripción activa</div>
+                                    <div class="subscription-plan" style="color:var(--text-muted);">Sin suscripción</div>
+                                    <div class="subscription-dates">Elige un plan para comenzar</div>
+                                </div>
+                            </div>
+                        `;
+                        return;
+                    }
+
+                    const sub  = data.subscription;
+                    const plan = sub.plan;
+                    const fin  = new Date(sub.fechaFin).toLocaleDateString('es-ES', { day:'2-digit', month:'long', year:'numeric' });
+                    const ini  = new Date(sub.fechaInicio).toLocaleDateString('es-ES', { day:'2-digit', month:'long', year:'numeric' });
+
+                    // Cargar vistas del mes
+                    const viewsRes = await apiFetch('/views/my-views');
+                    const viewsData = await viewsRes.json();
+                    const vistas    = viewsData.vistas || 0;
+                    const limite    = viewsData.limite === 0 ? 'Ilimitado' : viewsData.limite;
+                    const restantes = viewsData.restantes;
+
                     container.innerHTML = `
                         <div class="subscription-card">
                             <div class="subscription-info">
                                 <div class="subscription-title">Suscripción activa</div>
-                                <div class="subscription-plan" style="color:var(--text-muted);">Sin suscripción</div>
-                                <div class="subscription-dates">Elige un plan para comenzar</div>
+                                <div class="subscription-plan">${plan.nombre} — $${plan.precio}/mes</div>
+                                <div class="subscription-dates" style="margin-top:0.5rem;">
+                                    📅 Inicio: ${ini} &nbsp;|&nbsp; ⏳ Vence: ${fin}
+                                    &nbsp;|&nbsp; 🎬 Límite: ${plan.limiteRecursos === 0 ? 'Ilimitado' : plan.limiteRecursos + ' películas'}
+                                    🎬 Películas vistas este mes: <strong>${vistas}</strong> / ${limite}
+                                    &nbsp;|&nbsp; Restantes: <strong>${restantes}</strong>
+                                </div>
+                            </div>
+                            <div class="subscription-actions">
+                                <button class="btn-renew" onclick="renewSubscription()">Renovar</button>
+                                <button class="btn-cancel-sub" onclick="cancelSubscription()">Cancelar</button>
                             </div>
                         </div>
                     `;
-                    return;
+                } catch (err) {
+                    container.innerHTML = `<p style="color:var(--error);">Error cargando suscripción.</p>`;
                 }
-
-                const sub  = data.subscription;
-                const plan = sub.plan;
-                const fin  = new Date(sub.fechaFin).toLocaleDateString('es-ES', { day:'2-digit', month:'long', year:'numeric' });
-                const ini  = new Date(sub.fechaInicio).toLocaleDateString('es-ES', { day:'2-digit', month:'long', year:'numeric' });
-
-                container.innerHTML = `
-                    <div class="subscription-card">
-                        <div class="subscription-info">
-                            <div class="subscription-title">Suscripción activa</div>
-                            <div class="subscription-plan">${plan.nombre} — $${plan.precio}/mes</div>
-                            <div class="subscription-dates">
-                                📅 Inicio: ${ini} &nbsp;|&nbsp; ⏳ Vence: ${fin}
-                                &nbsp;|&nbsp; 🎬 Límite: ${plan.limiteRecursos === 0 ? 'Ilimitado' : plan.limiteRecursos + ' películas'}
-                            </div>
-                        </div>
-                        <div class="subscription-actions">
-                            <button class="btn-renew" onclick="renewSubscription()">Renovar</button>
-                            <button class="btn-cancel-sub" onclick="cancelSubscription()">Cancelar</button>
-                        </div>
-                    </div>
-                `;
-            } catch (err) {
-                container.innerHTML = `<p style="color:var(--error);">Error cargando suscripción.</p>`;
             }
-        }
 
         async function loadPlans() {
             const container = document.getElementById('plansGrid');
@@ -1948,7 +1957,7 @@
                             <button class="btn-icon btn-edit" onclick="openEditSubscriptionModal(${JSON.stringify(s).replace(/"/g, '&quot;')})">
                                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
                             </button>
-                            <button class="btn-icon btn-delete" onclick="confirmDelete('subscription', '${s._id}', '${s.user?.username}')">
+                            <button class="btn-icon btn-delete" onclick="confirmDelete('subscription', '${s._id}', '${s.user?.username || 'Suscripción'}')">
                                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
                             </button>
                         </div>
@@ -2068,6 +2077,38 @@
                 updateThemeIcon(true);
             }
         }
+        
+
+       async function loadMyViews() {
+            try {
+                const res  = await apiFetch('/views/my-views');
+                const data = await res.json();
+                return data;
+            } catch {
+                return null;
+            }
+        }
+        async function watchTrailer(movieId, trailerUrl) {
+        try {
+            const res  = await apiFetch('/views/view', {
+                method: 'POST',
+                body: JSON.stringify({ movieId })
+            });
+            const data = await res.json();
+
+            if (res.status === 403) {
+                showToast(data.message, 'error');
+                return;
+            }
+
+            window.open(trailerUrl, '_blank');
+
+            if (currentSection === 'subscriptions') loadMySubscription();
+
+        } catch(err) {
+            showToast('Error al registrar vista.', 'error');
+        }
+    }
         // ========================
         // START
         // ========================

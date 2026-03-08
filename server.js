@@ -8,7 +8,7 @@ const authRoutes  = require('./routes/auth.routes');
 const movieRoutes = require('./routes/movie.routes');
 const userRoutes  = require('./routes/user.routes');
 const subscriptionRoutes = require('./routes/subscription.routes');
-
+const movieViewRoutes = require('./routes/movieView.routes');
 const app = express();
 
 app.use(cors());
@@ -17,9 +17,10 @@ app.use(logger);
 
 app.get('/', (req, res) => res.send('BIENVENIDO A MOVIE ON LINE MDFKs'));
 
-app.use('/auth',   authRoutes);
-app.use('/movies', movieRoutes);
-app.use('/users',  userRoutes);
+app.use('/auth',          authRoutes);
+app.use('/movies',        movieRoutes);
+app.use('/views',         movieViewRoutes);
+app.use('/users',         userRoutes);
 app.use('/subscriptions', subscriptionRoutes);
 
 mongoose.connect(process.env.MONGO_URI)

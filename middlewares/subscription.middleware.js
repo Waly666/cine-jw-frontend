@@ -1,4 +1,5 @@
 const Subscription = require('../models/Subscription');
+const MovieView    = require('../models/MovieView');
 
 async function checkSubscription(req, res, next) {
     try {
@@ -28,17 +29,35 @@ async function checkSubscription(req, res, next) {
     }
 }
 
-// Verifica si el usuario no superó su límite de películas
 async function checkMovieLimit(req, res, next) {
     try {
+        // Admin no tiene límite
+        if (req.user.role === 'admin') return next();
+
         const subscription = req.subscription;
         const limite = subscription.plan.limiteRecursos;
 
         // 0 = ilimitado (Enterprise)
         if (limite === 0) return next();
 
-        // Aquí podrías contar cuántas películas ha visto el usuario
-        // Por ahora pasamos al siguiente middleware
+        // Contar vistas del mes actual
+        const ahora     = new Date();
+        const inicioMes = new Date(ahora.getFullYear(), ahora.getMonth(), 1);
+        const finMes    = new Date(ahora.getFullYear(), ahora.getMonth() + 1, 0);
+
+        const vistas = await MovieView.countDocuments({
+            user:      req.user.id,
+            viewedAt:  { $gte: inicioMes, $lte: finMes }
+        });
+
+        if (vistas >= limite) {
+            return res.status(403).json({
+                message: `Has alcanzado el límite de ${limite} películas de tu plan este mes MDFKs`,
+                limite,
+                vistas
+            });
+        }
+
         next();
 
     } catch (err) {
